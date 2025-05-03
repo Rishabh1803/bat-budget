@@ -7,7 +7,7 @@ WORKDIR /app
 # Copy gradle wrapper and dependencies
 COPY gradlew gradlew.bat ./
 COPY gradle gradle/
-COPY build.gradle settings.gradle ./
+COPY build.gradle.kts settings.gradle.kts ./
 RUN ./gradlew build --no-daemon
 
 # Copy the compiled jar into a new image
