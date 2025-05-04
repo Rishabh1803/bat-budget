@@ -8,6 +8,7 @@ WORKDIR /app
 COPY gradlew gradlew.bat ./
 COPY gradle gradle/
 COPY build.gradle.kts settings.gradle.kts ./
+COPY src src/
 RUN ./gradlew build --no-daemon
 
 # Copy the compiled jar into a new image
@@ -18,4 +19,4 @@ COPY --from=build /app/build/libs/user-service-0.0.1-SNAPSHOT.jar user-service.j
 EXPOSE 8080
 
 # Run the jar file
-ENTRYPOINT ["java", "-jar", "/user-service.jar"]
+ENTRYPOINT ["java", "-jar", "user-service.jar"]

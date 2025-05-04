@@ -13,6 +13,10 @@ java {
     }
 }
 
+tasks.bootJar {
+    mainClass.set("com.rk.batbudget.userservice.UserserviceApplication")
+}
+
 repositories {
     mavenCentral()
 }
