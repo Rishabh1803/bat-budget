@@ -1,0 +1,9 @@
+server:
+  port: 8081
+
+spring:
+  kafka:
+    bootstrap-servers: localhost:9002
+
+jwt:
+  secret: "this_is_a_very_secret_key"

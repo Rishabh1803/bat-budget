@@ -3,6 +3,7 @@ package com.rk.batbudget.userservice.controller;
 import com.rk.batbudget.userservice.entity.User;
 import com.rk.batbudget.userservice.jpa.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -32,5 +33,16 @@ public class UserController {
     @GetMapping
     public List<User> getUsers() {
         return userRepository.findAll();
+    }
+
+    @PutMapping
+    public User updateUser(@RequestBody User user) {
+        return userRepository.save(user);
+    }
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity<User> deleteUser(@PathVariable long id) {
+        userRepository.deleteById(id);
+        return ResponseEntity.ok().build();
     }
 }
