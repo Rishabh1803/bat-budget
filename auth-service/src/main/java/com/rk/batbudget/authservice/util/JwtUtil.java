@@ -15,10 +15,10 @@ public class JwtUtil {
 
     public String generateToken(String email) {
         return Jwts.builder()
-                .setSubject(email)
-                .setIssuedAt(new Date())
-                .setExpiration(new Date(System.currentTimeMillis() + 86400000))
-                .signWith(SignatureAlgorithm.HS256, secret)
+                .setSubject(email) // sets the main user identity
+                .setIssuedAt(new Date()) // when the token was issued
+                .setExpiration(new Date(System.currentTimeMillis() + 86400000)) // 1-day validity
+                .signWith(SignatureAlgorithm.HS256, secret) // signed with our secret
                 .compact();
     }
 
