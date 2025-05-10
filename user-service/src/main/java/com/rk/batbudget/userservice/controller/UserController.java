@@ -1,7 +1,7 @@
 package com.rk.batbudget.userservice.controller;
 
-import com.rk.batbudget.userservice.entity.User;
-import com.rk.batbudget.userservice.jpa.UserRepository;
+import com.rk.batbudget.common.entity.User;
+import com.rk.batbudget.userservice.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -13,36 +13,36 @@ import java.util.Optional;
 @RequestMapping("/users")
 public class UserController {
 
-    private final UserRepository userRepository;
+    private final UserService userService;
 
     @Autowired
-    public UserController(UserRepository userRepository) {
-        this.userRepository = userRepository;
+    public UserController(UserService userService) {
+        this.userService = userService;
     }
 
     @PostMapping
     public User createUser(@RequestBody User user) {
-        return userRepository.save(user);
+        return userService.saveUser(user);
     }
 
     @GetMapping("/{id}")
     public Optional<User> getUser(@PathVariable long id) {
-        return userRepository.findById(id);
+        return userService.findUserById(id);
     }
 
     @GetMapping
     public List<User> getUsers() {
-        return userRepository.findAll();
+        return userService.findAllUsers();
     }
 
     @PutMapping
     public User updateUser(@RequestBody User user) {
-        return userRepository.save(user);
+        return userService.saveUser(user);
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<User> deleteUser(@PathVariable long id) {
-        userRepository.deleteById(id);
+    public ResponseEntity<?> deleteUser(@PathVariable long id) {
+        userService.deleteUserById(id);
         return ResponseEntity.ok().build();
     }
 }

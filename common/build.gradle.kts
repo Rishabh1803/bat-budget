@@ -4,14 +4,19 @@ plugins {
     id("io.spring.dependency-management") version "1.1.7"
 }
 
+group = "com.rk.batbudget"
+version = "0.0.1-SNAPSHOT"
+
 java {
     toolchain {
         languageVersion = JavaLanguageVersion.of(21)
     }
 }
 
-tasks.bootJar {
-    mainClass.set("com.rk.batbudget.userservice.UserserviceApplication")
+configurations {
+    compileOnly {
+        extendsFrom(configurations.annotationProcessor.get())
+    }
 }
 
 repositories {
@@ -19,15 +24,11 @@ repositories {
 }
 
 dependencies {
-    implementation(project(":common"))
-    implementation(project(":cache-service"))
     implementation("org.springframework.boot:spring-boot-starter-data-jpa")
-    implementation("org.springframework.boot:spring-boot-starter-web")
-    implementation("org.springframework.kafka:spring-kafka")
     compileOnly("org.projectlombok:lombok")
-    annotationProcessor("org.projectlombok:lombok")
-    developmentOnly("org.springframework.boot:spring-boot-devtools")
     runtimeOnly("com.h2database:h2")
+    runtimeOnly("org.postgresql:postgresql")
+    annotationProcessor("org.projectlombok:lombok")
     testImplementation("org.springframework.boot:spring-boot-starter-test")
     testRuntimeOnly("org.junit.platform:junit-platform-launcher")
 }

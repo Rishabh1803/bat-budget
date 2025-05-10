@@ -1,2 +1,2 @@
 rootProject.name = "bat-budget"
-include("auth-service", "user-service")
+include("common", "auth-service", "user-service", "persistence-service", "cache-service")
