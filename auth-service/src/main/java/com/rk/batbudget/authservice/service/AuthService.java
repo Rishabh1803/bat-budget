@@ -12,7 +12,6 @@ import org.springframework.kafka.core.KafkaTemplate;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
-import java.util.Base64;
 import java.util.List;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
@@ -57,7 +56,8 @@ public class AuthService {
             throw new IllegalArgumentException("Invalid credentials");
         }
 
-        String token = jwtUtil.generateToken(user.getEmail());
-        return new LoginResponse(token);
+        String accessToken = jwtUtil.generateAccessToken(user.getEmail());
+        String refreshToken = jwtUtil.generateRefreshToken(loginRequest.getEmail());
+        return new LoginResponse(accessToken, refreshToken);
     }
 }

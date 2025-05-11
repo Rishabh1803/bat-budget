@@ -1,6 +1,5 @@
 plugins {
     id("java-library")
-    id("io.spring.dependency-management") version "1.1.7"
 }
 
 java {
@@ -20,11 +19,12 @@ repositories {
 }
 
 dependencies {
-    compileOnly("org.projectlombok:lombok")
-    runtimeOnly("com.h2database:h2")
-    runtimeOnly("org.postgresql:postgresql")
-    annotationProcessor("org.projectlombok:lombok")
-    testRuntimeOnly("org.junit.platform:junit-platform-launcher")
+    compileOnly("org.projectlombok:lombok:1.18.38")
+    implementation("jakarta.persistence:jakarta.persistence-api:3.2.0")
+    runtimeOnly("com.h2database:h2:2.3.232")
+    runtimeOnly("org.postgresql:postgresql:42.7.5")
+    annotationProcessor("org.projectlombok:lombok:1.18.38")
+    testRuntimeOnly("org.junit.platform:junit-platform-launcher:1.11.4")
 }
 
 tasks.withType<Test> {
