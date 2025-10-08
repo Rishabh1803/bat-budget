@@ -49,7 +49,7 @@ public class AuthController {
     @PostMapping("/refresh")
     public ResponseEntity<?> refreshToken(@RequestBody RefreshRequest request) {
         try {
-            String refreshToken = request.getRefreshToken();
+            String refreshToken = request.refreshToken();
             String email = jwtUtil.parseToken(refreshToken).getSubject();
 
             if (!tokenService.validateRefreshToken(email, refreshToken)) {

@@ -46,20 +46,9 @@ services:
       SPRING_DATASOURCE_URL: jdbc:postgresql://postgres:5432/batdb
       SPRING_DATASOURCE_USERNAME: batuser
       SPRING_DATASOURCE_PASSWORD: batpass
-      SPRING_REDIS_HOST: redis
-      SPRING_REDIS_PORT: 6379
     depends_on:
       - kafka
-      - redis
       - postgres
-    networks:
-      - bat-budget-network
-
-  redis:
-    image: redis:7.0-alpine
-    container_name: redis
-    ports:
-      - "6379:6379"
     networks:
       - bat-budget-network
 
@@ -77,30 +66,16 @@ services:
     networks:
       - bat-budget-network
 
-  cache-service:
-    build:
-      context: ./cache-service
-    container_name: cache-service
-    ports:
-      - "8083:8083"
-    depends_on:
-      - redis
-    networks:
-      - bat-budget-network
-
   persistence-service:
     build:
       context: ./persistence-service
     container_name: persistence-service
     depends_on:
-      - redis
       - postgres
     environment:
       SPRING_DATASOURCE_URL: jdbc:postgresql://postgres:5432/batdb
       SPRING_DATASOURCE_USERNAME: batuser
       SPRING_DATASOURCE_PASSWORD: batpass
-      SPRING_REDIS_HOST: redis
-      SPRING_REDIS_PORT: 6379
     ports:
       - "8082:8082"
     networks:

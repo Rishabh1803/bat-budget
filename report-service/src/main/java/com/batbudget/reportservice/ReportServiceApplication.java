@@ -1,13 +1,12 @@
-package com.rk.batbudget.cacheservice;
+package com.batbudget.reportservice;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-public class CacheServiceApplication {
-
+public class ReportServiceApplication {
     public static void main(String[] args) {
-        SpringApplication.run(CacheServiceApplication.class, args);
+        SpringApplication.run(ReportServiceApplication.class, args);
     }
-
 }
+
